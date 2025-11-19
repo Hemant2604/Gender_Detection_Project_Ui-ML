@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from .models import ImageUpload
-from tensorflow.keras.utils import img_to_array
+from keras.utils import img_to_array
 from keras.models import load_model
 from PIL import Image
 import uuid
