@@ -40,6 +40,18 @@
                             <p>Found <strong>{{ num_faces }}</strong> face(s) in the image.</p>
                         </div>
 
+                        {% if predictions %}
+                        <div class="alert alert-info" role="alert">
+                            <h5 class="mb-2">Predictions</h5>
+                            <ul class="list-unstyled mb-0">
+                                {% for pred in predictions %}
+                                <li>Face {{ pred.face_number }}: <strong>{{ pred.label|title }}</strong> ({{
+                                    pred.confidence|floatformat:2 }}%)</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <h5 class="mb-3">📤 Original Image</h5>

@@ -22,7 +22,7 @@ if image is None:
     exit()
 
 # Load pre-trained model - using os.path.join for cross-platform compatibility
-model_path = os.path.join(BASE_DIR, "epochs_044-val_accuracy_0.966.keras")
+model_path = os.path.join(BASE_DIR, 'GenderDetector', 'models', "epochs_044-val_accuracy_0.966.keras") 
 
 try:
     model = load_model(model_path)

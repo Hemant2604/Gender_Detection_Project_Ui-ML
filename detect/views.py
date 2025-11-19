@@ -13,7 +13,8 @@ from PIL import Image
 import uuid
 
 # Load model once globally for performance
-MODEL_PATH = os.path.join(settings.BASE_DIR, 'epochs_044-val_accuracy_0.966.keras')
+BASE_DIR = settings.BASE_DIR
+MODEL_PATH = os.path.join(BASE_DIR, 'GenderDetector', 'model', 'epochs_044-val_accuracy_0.966.keras')
 try:
     model = load_model(MODEL_PATH)
     print("Model loaded successfully!")
@@ -57,6 +58,8 @@ def detect_gender(request):
                 'image_upload': image_upload
             })
         
+        predictions = []
+
         # Process each detected face
         for idx, face in enumerate(faces):
             # Get corner points of face rectangle
@@ -93,6 +96,13 @@ def detect_gender(request):
                 # Write label and confidence above face rectangle
                 cv2.putText(image, label_text, (startX, Y), cv2.FONT_HERSHEY_SIMPLEX,
                            0.7, (0, 255, 0), 2)
+
+                predictions.append({
+                    'face_number': idx + 1,
+                    'label': label,
+                    'confidence': confidence,
+                    'label_text': label_text
+                })
         
         # Save processed image
         result_filename = f"result_{uuid.uuid4().hex[:8]}.jpg"
@@ -112,6 +122,7 @@ def detect_gender(request):
         context = {
             'image_upload': image_upload,
             'num_faces': len(faces),
+            'predictions': predictions,
         }
         
         return render(request, 'detect/result.html', context)
