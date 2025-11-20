@@ -4,6 +4,9 @@ import numpy as np
 import cv2
 import os
 import cvlib as cv
+import tensorflow as tf
+tf.config.set_visible_devices([], 'GPU')
+
 
 # Get the base directory of the script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

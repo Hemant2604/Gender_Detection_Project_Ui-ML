@@ -11,6 +11,8 @@ from keras.utils import img_to_array
 from keras.models import load_model
 from PIL import Image
 import uuid
+import tensorflow as tf
+tf.config.set_visible_devices([], 'GPU')
 
 # Load model once globally for performance
 BASE_DIR = settings.BASE_DIR
