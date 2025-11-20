@@ -27,7 +27,3 @@ staticfiles/
 # OS
 Thumbs.db
 .DS_Store
-
-# Model files
-*.keras
-*.h5
